@@ -28,6 +28,9 @@
         onActivation = {
           cleanup = "zap";
         };
+        casks = [
+          "ghostty"
+        ];
       };
 
       nix.settings.experimental-features = [
