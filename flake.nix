@@ -39,7 +39,7 @@
       nixpkgs.hostPlatform = "aarch64-darwin";
     };
   in {
-    darwinConfigurations."simple" = darwin.lib.darwinSystem {
+    darwinConfigurations."LJQPCW4D95" = darwin.lib.darwinSystem {
       modules = [configuration];
     };
   };
