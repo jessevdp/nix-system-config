@@ -7,3 +7,9 @@ curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix 
   sh -s -- install
 ```
 
+Install [Homebrew](https://brew.sh) (it will be [managed by nix-darwin](https://daiderd.com/nix-darwin/manual/index.html#opt-homebrew.enable):
+
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+

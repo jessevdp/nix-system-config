@@ -23,6 +23,13 @@
         vim
       ];
 
+      homebrew = {
+        enable = true;
+        onActivation = {
+          cleanup = "zap";
+        };
+      };
+
       nix.settings.experimental-features = [
         "nix-command"
         "flakes"
