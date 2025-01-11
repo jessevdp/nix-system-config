@@ -10,14 +10,20 @@
       url = "github:LnL7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
     self,
     darwin,
+    home-manager,
     ...
   }: let
-    configuration = {pkgs, ...}: {
+    darwin-configuration = {pkgs, ...}: {
       environment.systemPackages = with pkgs; [
         git
         vim
@@ -38,6 +44,10 @@
         "flakes"
       ];
 
+      users.users."jessevanderpluijm" = {
+        home = "/Users/jessevanderpluijm";
+      };
+
       # We install Nix using a separate installer so we don't want nix-darwin
       # to manage it for us. This tells nix-darwin to just use whatever is running.
       nix.useDaemon = true;
@@ -54,7 +64,15 @@
     };
   in {
     darwinConfigurations."LJQPCW4D95" = darwin.lib.darwinSystem {
-      modules = [configuration];
+      modules = [
+        darwin-configuration
+        home-manager.darwinModules.home-manager
+        {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+          home-manager.users.jessevanderpluijm = import ./home.nix;
+        }
+      ];
     };
   };
 }
