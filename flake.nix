@@ -44,6 +44,12 @@
         "flakes"
       ];
 
+      system.keyboard = {
+        enableKeyMapping = true;
+        remapCapsLockToControl = true;
+        swapLeftCtrlAndFn = true;
+      };
+
       users.users."jessevanderpluijm" = {
         home = "/Users/jessevanderpluijm";
       };
