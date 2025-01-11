@@ -23,7 +23,11 @@
     home-manager,
     ...
   }: let
-    darwin-configuration = {pkgs, ...}: {
+    darwin-configuration = {
+      config,
+      pkgs,
+      ...
+    }: {
       environment.systemPackages = with pkgs; [
         git
         vim
@@ -48,6 +52,18 @@
         enableKeyMapping = true;
         remapCapsLockToControl = true;
         swapLeftCtrlAndFn = true;
+      };
+
+      system.defaults.dock = {
+        autohide = true;
+        persistent-apps = [
+          "/System/Cryptexes/App/System/Applications/Safari.app" # "/Applications/Safari.app"
+          "/Applications/Ghostty.app"
+        ];
+        persistent-others = [
+          "${config.users.users."jessevanderpluijm".home}/Downloads"
+        ];
+        show-recents = false;
       };
 
       users.users."jessevanderpluijm" = {
