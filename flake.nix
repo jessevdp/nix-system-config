@@ -68,6 +68,14 @@
 
       system.defaults.dock.mru-spaces = false;
 
+      system.defaults.finder = {
+        AppleShowAllExtensions = true;
+        AppleShowAllFiles = true;
+        FXPreferredViewStyle = "clmv";
+        _FXSortFoldersFirst = true;
+        _FXSortFoldersFirstOnDesktop = true;
+      };
+
       users.users."jessevanderpluijm" = {
         home = "/Users/jessevanderpluijm";
       };
