@@ -15,12 +15,20 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    agenix = {
+      url = "github:ryantm/agenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.darwin.follows = "darwin";
+      inputs.home-manager.follows = "home-manager";
+    };
   };
 
   outputs = {
     self,
     darwin,
     home-manager,
+    agenix,
     ...
   }: let
     darwin-configuration = {
@@ -102,7 +110,12 @@
         {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
-          home-manager.users.jessevanderpluijm = import ./home.nix;
+          home-manager.users.jessevanderpluijm = {...}: {
+            imports = [
+              ./home.nix
+              agenix.homeManagerModules.default
+            ];
+          };
         }
       ];
     };
