@@ -66,6 +66,8 @@
         show-recents = false;
       };
 
+      system.defaults.dock.mru-spaces = false;
+
       users.users."jessevanderpluijm" = {
         home = "/Users/jessevanderpluijm";
       };
