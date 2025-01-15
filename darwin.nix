@@ -29,6 +29,11 @@
     swapLeftCtrlAndFn = true;
   };
 
+  system.defaults.NSGlobalDomain = {
+    InitialKeyRepeat = 15;
+    KeyRepeat = 1;
+  };
+
   system.defaults.dock = {
     autohide = true;
     persistent-apps = [
