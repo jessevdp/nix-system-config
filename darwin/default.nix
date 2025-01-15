@@ -1,59 +1,29 @@
-{
-  config,
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
+  imports = [
+    ./dock.nix
+    ./finder.nix
+    ./homebrew.nix
+    ./keyboard.nix
+    ./mission-control.nix
+  ];
+
+  # Used for backwards compatibility, please read the changelog before changing.
+  # $ darwin-rebuild changelog
+  system.stateVersion = 5;
+
+  # We install Nix using a separate installer so we don't want nix-darwin
+  # to manage it for us. This tells nix-darwin to just use whatever is running.
+  nix.useDaemon = true;
+
+  programs.zsh.enable = true;
+
+  # TODO: make username a variable?
+  users.users."jessevanderpluijm" = {
+    home = "/Users/jessevanderpluijm";
+  };
+
   environment.systemPackages = with pkgs; [
     git
     vim
   ];
-
-  homebrew = {
-    enable = true;
-    onActivation = {
-      cleanup = "zap";
-    };
-    casks = [
-      "ghostty"
-    ];
-  };
-
-  nix.settings.experimental-features = [
-    "nix-command"
-    "flakes"
-  ];
-
-  system.keyboard = {
-    enableKeyMapping = true;
-    remapCapsLockToControl = true;
-    swapLeftCtrlAndFn = true;
-  };
-
-  system.defaults.NSGlobalDomain = {
-    InitialKeyRepeat = 15;
-    KeyRepeat = 1;
-  };
-
-  system.defaults.dock = {
-    autohide = true;
-    persistent-apps = [
-      "/System/Cryptexes/App/System/Applications/Safari.app" # "/Applications/Safari.app"
-      "/Applications/Ghostty.app"
-    ];
-    persistent-others = [
-      "${config.users.users."jessevanderpluijm".home}/Downloads"
-    ];
-    show-recents = false;
-  };
-
-  system.defaults.dock.mru-spaces = false;
-
-  system.defaults.finder = {
-    AppleShowAllExtensions = true;
-    AppleShowAllFiles = true;
-    FXEnableExtensionChangeWarning = false;
-    FXPreferredViewStyle = "clmv";
-    _FXSortFoldersFirst = true;
-    _FXSortFoldersFirstOnDesktop = true;
-  };
 }
