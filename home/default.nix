@@ -5,6 +5,8 @@
     stateVersion = "25.05";
   };
 
+  programs.zsh.enable = true;
+
   xdg = {
     enable = true;
   };
