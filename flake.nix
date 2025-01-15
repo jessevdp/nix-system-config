@@ -54,14 +54,14 @@
 
           programs.zsh.enable = true;
         }
-        ./darwin.nix
+        ./darwin
         home-manager.darwinModules.home-manager
         {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
           home-manager.users.jessevanderpluijm = {...}: {
             imports = [
-              ./home.nix
+              ./home
               agenix.homeManagerModules.default
             ];
           };
