@@ -2,6 +2,8 @@
   imports = [
     ./ghostty.nix
     ./git.nix
+    ./ssh.nix
+    ./zsh
   ];
 
   home = {
@@ -17,14 +19,4 @@
   age.identityPaths = [
     "${config.home.homeDirectory}/.ssh/nix_system_secrets_decryption_ed25519"
   ];
-
-  programs.zsh.enable = true;
-
-  programs.ssh = {
-    enable = true;
-    extraConfig = ''
-      UseKeychain yes
-      AddKeysToAgent yes
-    '';
-  };
 }
