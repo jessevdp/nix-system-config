@@ -1,6 +1,7 @@
 {
   imports = [
     ./prompt
+    ./vi-mode
   ];
 
   programs.zsh = {
