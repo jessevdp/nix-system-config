@@ -3,6 +3,7 @@
     ./autosuggestion.nix
     ./completion.nix
     ./fzf.nix
+    ./history.nix
     ./prompt
     ./vi-mode
   ];
