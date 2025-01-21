@@ -1,5 +1,6 @@
 {
   imports = [
+    ./completion.nix
     ./fzf.nix
     ./prompt
     ./vi-mode
