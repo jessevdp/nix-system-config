@@ -12,5 +12,9 @@
   programs.zsh = {
     enable = true;
     syntaxHighlighting.enable = true;
+
+    sessionVariables = {
+      CLICOLOR = 1;
+    };
   };
 }
