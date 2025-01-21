@@ -1,5 +1,6 @@
 {
   imports = [
+    ./fzf.nix
     ./prompt
     ./vi-mode
   ];
