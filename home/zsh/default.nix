@@ -1,5 +1,6 @@
 {
   imports = [
+    ./autosuggestion.nix
     ./completion.nix
     ./fzf.nix
     ./prompt
