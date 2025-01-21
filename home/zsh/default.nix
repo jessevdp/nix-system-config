@@ -6,6 +6,7 @@
     ./history.nix
     ./prompt
     ./vi-mode
+    ./zoxide.nix
   ];
 
   programs.zsh = {
