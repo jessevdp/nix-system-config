@@ -4,6 +4,8 @@
     ./git.nix
     ./ssh.nix
     ./zsh
+
+    ./work-io
   ];
 
   home = {
