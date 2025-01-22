@@ -1,10 +1,13 @@
 {pkgs, ...}: {
   imports = [
     ./dock.nix
+    ./docker.nix
     ./finder.nix
     ./homebrew.nix
     ./keyboard.nix
     ./mission-control.nix
+
+    ./colima.nix
   ];
 
   # Used for backwards compatibility, please read the changelog before changing.
