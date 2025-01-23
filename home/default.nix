@@ -1,5 +1,6 @@
 {config, ...}: {
   imports = [
+    ./btop.nix
     ./ghostty.nix
     ./git.nix
     ./lazydocker.nix
