@@ -22,6 +22,10 @@
       gpg.format = "ssh";
       user.signingkey = config.age.secrets.jessevdp_github_signing_ssh_key.path;
       commit.gpgsign = true;
+
+      pull.rebase = true;
+      push.autoSetupRemote = true;
+      init.defaultBranch = "main";
     };
   };
 }
