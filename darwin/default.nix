@@ -29,4 +29,6 @@
     git
     vim
   ];
+
+  security.pam.enableSudoTouchIdAuth = true;
 }
