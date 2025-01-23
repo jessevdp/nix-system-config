@@ -2,6 +2,7 @@
   imports = [
     ./ghostty.nix
     ./git.nix
+    ./safari.nix
     ./ssh.nix
     ./zsh
 
