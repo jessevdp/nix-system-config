@@ -8,5 +8,6 @@
   system.defaults.NSGlobalDomain = {
     InitialKeyRepeat = 15;
     KeyRepeat = 1;
+    AppleKeyboardUIMode = 3; # enable full keyboard control
   };
 }
