@@ -1,0 +1,88 @@
+layout {
+    default_tab_template {
+        pane size=1 borderless=true {
+            plugin location="https://github.com/dj95/zjstatus/releases/latest/download/zjstatus.wasm" {
+                // colors from: https://github.com/ellisonleao/gruvbox.nvim/blob/68c3460a5d1d1a362318960035c9f3466d5011f5/lua/gruvbox.lua#L74-L127
+                color_dark0 "#282828"
+                color_dark1 "#3c3836"
+                color_dark2 "#504945"
+                color_dark3 "#665c54"
+                color_dark4 "#7c6f64"
+                color_light0 "#fbf1c7"
+                color_light1 "#ebdbb2"
+                color_light2 "#d5c4a1"
+                color_light3 "#bdae93"
+                color_light4 "#a89984"
+
+                color_gray "#928374"
+                color_bg "#282828"
+
+                color_red "#fb4934"
+                color_green "#b8bb26"
+                color_yellow "#fabd2f"
+                color_blue "#83a598"
+                color_purple "#b16286" // "#d3869b"
+                color_aqua "#8ec07c"
+                color_orange "#fe8019"
+
+                format_left   "{tabs}"
+                format_center "#[bg=$bg,fg=$light3]{session}"
+                // format_right  "{command_git_branch} {command_pwd} {mode}"
+                format_right  "{mode}"
+                format_space  "#[bg=$bg]"
+
+                format_hide_on_overlength "true"
+                format_precedence "rlc" // c=center, r=right, l=left
+
+                border_enabled  "false"
+
+                // hide_frame_for_single_pane "true"
+                // hide_frame_except_for_search "true"
+                // hide_frame_except_for_fullscreen "true"
+
+                mode_normal        "#[bg=$orange,fg=$bg,bold] 󰌿 "
+                mode_locked        "#[bg=$dark1,fg=$light4,bold] 󰌾 "
+                mode_pane          "#[bg=$yellow,fg=$bg,bold] P "
+                mode_rename_pane   "#[bg=$yellow,fg=$bg,bold] RENAME-PANE "
+                mode_resize        "#[bg=$yellow,fg=$bg,bold] R "
+                mode_move          "#[bg=$yellow,fg=$bg,bold] M "
+                mode_tab           "#[bg=$green,fg=$bg,bold] T "
+                mode_rename_tab    "#[bg=$green,fg=$bg,bold] RENAME-TAB "
+                mode_session       "#[bg=$purple,fg=$bg,bold] S "
+                mode_scroll        "#[bg=$blue,fg=$bg,bold] SCROLL "
+                mode_enter_search  "#[bg=$blue,fg=$bg,bold] ENT-SEARCH "
+                mode_search        "#[bg=$blue,fg=$bg,bold] SEARCH "
+                mode_prompt        "#[bg=$red,fg=$bg,bold] POMPT "
+                mode_tmux          "#[bg=$aqua,fg=$bg,bold] TMUX "
+
+                // formatting for inactive tabs
+                tab_normal              "#[bg=$bg,fg=$light3] {index} {name}{floating_indicator} "
+                tab_normal_fullscreen   "#[bg=$bg,fg=$light3] {index} {name}{fullscreen_indicator} "
+                tab_normal_sync         "#[bg=$bg,fg=$light3] {index} {name}{sync_indicator} "
+
+                // formatting for the current active tab
+                tab_active              "#[bg=$dark1,fg=$orange]  #[bg=$dark1,fg=$light0]{name}{floating_indicator} "
+                tab_active_fullscreen   "#[bg=$dark1,fg=$orange]  #[bg=$dark1,fg=$light0]{name}{fullscreen_indicator} "
+                tab_active_sync         "#[bg=$dark1,fg=$orange]  #[bg=$dark1,fg=$light0]{name}{sync_indicator} "
+
+                tab_separator           ""
+
+                tab_sync_indicator       " "
+                tab_fullscreen_indicator " 󰊓"
+                tab_floating_indicator   " 󰹙"
+
+                command_git_branch_command     "git rev-parse --abbrev-ref HEAD"
+                command_git_branch_format      "#[bg=$bg,fg=$purple,bold]{stdout}"
+                command_git_branch_interval    "2"
+                command_git_branch_rendermode  "static"
+
+                command_pwd_command     "bash -c 'bash ~/.config/zellij/print_current_path'"
+                command_pwd_format      "#[bg=$bg,fg=$aqua,bold]{stdout}"
+                command_pwd_interval    "2"
+                command_pwd_rendermode  "static"
+            }
+        }
+
+        children
+    }
+}

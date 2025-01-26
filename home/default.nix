@@ -7,6 +7,7 @@
     ./lazygit.nix
     ./safari.nix
     ./ssh.nix
+    ./zellij
     ./zsh
 
     ./work-io
