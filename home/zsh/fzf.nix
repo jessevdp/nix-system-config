@@ -15,6 +15,7 @@
 
     defaultOptions = [
       "--layout=reverse"
+      "--height=~40%"
       "--border sharp"
       "--info inline-right"
     ];
