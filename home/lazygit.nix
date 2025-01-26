@@ -8,6 +8,12 @@
         filterMode = "fuzzy";
         statusPanelView = "allBranchesLog";
       };
+      git = {
+        paging = {
+          colorArg = "always";
+          pager = "delta --dark --paging=never";
+        };
+      };
     };
   };
 
