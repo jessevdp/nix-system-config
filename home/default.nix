@@ -3,6 +3,7 @@
     ./bat.nix
     ./btop.nix
     ./ghostty.nix
+    ./git-delta.nix
     ./git.nix
     ./lazydocker.nix
     ./lazygit.nix
