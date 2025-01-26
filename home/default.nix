@@ -1,5 +1,6 @@
 {config, ...}: {
   imports = [
+    ./bat.nix
     ./btop.nix
     ./ghostty.nix
     ./git.nix
