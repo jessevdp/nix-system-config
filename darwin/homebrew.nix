@@ -6,6 +6,7 @@
     };
     casks = [
       "ghostty"
+      "logi-options+"
     ];
   };
 }
