@@ -28,4 +28,8 @@
   age.identityPaths = [
     "${config.home.homeDirectory}/.ssh/nix_system_secrets_decryption_ed25519"
   ];
+
+  home.sessionVariables = {
+    CLICOLOR = 1;
+  };
 }
