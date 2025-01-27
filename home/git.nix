@@ -23,9 +23,12 @@
       user.signingkey = config.age.secrets.jessevdp_github_signing_ssh_key.path;
       commit.gpgsign = true;
 
+      init.defaultBranch = "main";
+      fetch.prune = true;
       pull.rebase = true;
       push.autoSetupRemote = true;
-      init.defaultBranch = "main";
+      rebase.updateRefs = true;
+      merge.conflictStyle = "zdiff3";
     };
   };
 }
