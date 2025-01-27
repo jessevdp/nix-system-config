@@ -2,6 +2,7 @@
   imports = [
     ./autosuggestion.nix
     ./completion.nix
+    ./e.nix
     ./fzf.nix
     ./history.nix
     ./prompt
