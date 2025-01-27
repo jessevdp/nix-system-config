@@ -2,6 +2,7 @@
   imports = [
     ./bat.nix
     ./btop.nix
+    ./direnv.nix
     ./ghostty.nix
     ./git-delta.nix
     ./git.nix
