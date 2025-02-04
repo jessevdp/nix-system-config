@@ -1,5 +1,6 @@
 {pkgs, ...}: {
   imports = [
+    ./1password.nix
     ./dock.nix
     ./docker.nix
     ./finder.nix
