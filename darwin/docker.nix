@@ -1,15 +1,9 @@
 {
-  pkgs,
-  ...
-}: {
-  environment.systemPackages = with pkgs; [
-    docker
-  ];
-
   services.colima = {
     enable = true;
-    createDockerSocket = true;
+    enableDockerCompatability = true;
     groupMembers = [
+      # TODO: make username a variable?
       "jessevanderpluijm"
     ];
   };

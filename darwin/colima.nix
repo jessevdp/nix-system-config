@@ -3,7 +3,6 @@
 * This is a direct copy of: https://github.com/LnL7/nix-darwin/blob/260186e6d4af75f0c8fa3a63e91c18188c4dde29/modules/services/colima/default.nix
 * Which is part of https://github.com/LnL7/nix-darwin/pull/1275.
 */
-
 {
   config,
   lib,
@@ -16,29 +15,38 @@ with lib; let
   group = config.users.groups."_colima";
 in {
   options.services.colima = {
-    enable = mkEnableOption "Container runtimes on macOS";
+    enable = mkEnableOption "Colima, a macOS container runtime";
 
-    createDockerSocket = mkEnableOption ''
-      Create a symlink from Colima's socket to /var/run/docker.sock, and set
-      it's permissions so that users part of the _colima group can use it.
-    '';
+    enableDockerCompatability = mkOption {
+      type = types.bool;
+      default = false;
+      description = ''
+        Create a symlink from Colima's socket to /var/run/docker.sock, and set
+        its permissions so that users part of the _colima group can use it.
+      '';
+    };
 
-    package = mkOption {
-      type = types.package;
-      default = pkgs.colima;
-      defaultText = literalExpression "pkgs.colima";
+    package = mkPackageOption pkgs "colima" {};
+
+    stateDir = lib.mkOption {
+      type = types.path;
+      default = "/var/lib/colima";
+      description = "State directory of the Colima process.";
     };
 
     logFile = mkOption {
       type = types.path;
       default = "/var/log/colima.log";
-      description = "Stdout and sterr of the colima process.";
+      description = "Combined stdout and stderr of the colima process. Set to /dev/null to disable.";
     };
 
     groupMembers = mkOption {
       type = types.listOf types.str;
       default = [];
-      description = "List of users that should be added to the colima group.";
+      description = ''
+        List of users that should be added to the _colima group.
+        Only has effect with enableDockerCompatability enabled.
+      '';
     };
 
     runtime = mkOption {
@@ -78,71 +86,94 @@ in {
     };
   };
 
-  config = mkIf cfg.enable {
-    launchd.daemons.colima-create-docker-socket-and-set-permissions = {
-      script = ''
-        until [ -S ${user.home}/.colima/default/docker.sock ]
-        do
-          sleep 5
-        done
+  config = mkMerge [
+    (mkIf cfg.enableDockerCompatability {
+      # NOTE: had to disable this...
+      # assertions = [
+      #   {
+      #     assertion = !cfg.enable;
+      #     message = "services.colima.enableDockerCompatability doesn't make sense without enabling services.colima.enable";
+      #   }
+      # ];
 
-        chmod g+rw ${user.home}/.colima/default/docker.sock
-        ln -sf ${user.home}/.colima/default/docker.sock /var/run/docker.sock
-      '';
+      launchd.daemons.colima-docker-compat = {
+        script = ''
+          # Wait for the docker socket to be created. This is important when
+          # we enabled Colima and Docker compatability at the same time, for
+          # the first time. Colima takes a while creating the VM.
+          until [ -S ${cfg.stateDir}/.colima/default/docker.sock ]
+          do
+            sleep 5
+          done
 
-      serviceConfig.RunAtLoad = cfg.createDockerSocket;
-      serviceConfig.EnvironmentVariables.PATH = "/usr/bin:/bin:/usr/sbin:/sbin";
-    };
+          chmod g+rw ${cfg.stateDir}/.colima/default/docker.sock
+          ln -sf ${cfg.stateDir}/.colima/default/docker.sock /var/run/docker.sock
+        '';
 
-    launchd.daemons.colima = {
-      script =
-        concatStringsSep " " [
-          "exec"
-          (getExe cfg.package)
-          "start"
-          "--foreground"
-          "--runtime ${cfg.runtime}"
-          "--arch ${cfg.architectue}"
-          "--vm-type ${cfg.vmType}"
-        ]
-        + escapeShellArgs cfg.extraFlags;
-
-      serviceConfig = {
-        KeepAlive = true;
-        RunAtLoad = true;
-        StandardErrorPath = cfg.logFile;
-        StandardOutPath = cfg.logFile;
-        GroupName = group.name;
-        UserName = user.name;
-        WorkingDirectory = user.home;
-        EnvironmentVariables = {
-          PATH = "${pkgs.colima}/bin:${pkgs.docker}/bin:/usr/bin:/bin:/usr/sbin:/sbin";
-          COLIMA_HOME = "${user.home}/.colima";
+        serviceConfig = {
+          RunAtLoad = true;
+          EnvironmentVariables.PATH = "/usr/bin:/bin:/usr/sbin:/sbin";
         };
       };
-    };
 
-    system.activationScripts.preActivation.text = ''
-      touch '${cfg.logFile}'
-      chown ${toString user.uid}:${toString user.gid} '${cfg.logFile}'
-    '';
+      users.groups."_colima".members = cfg.groupMembers;
 
-    users = {
-      knownGroups = [
-        "colima"
-        "_colima"
+      environment.systemPackages = [
+        pkgs.docker
       ];
-      knownUsers = [
-        "colima"
-        "_colima"
-      ];
+    })
 
-      users."colima" = {
-        uid = mkDefault 400;
-        gid = mkDefault group.gid;
-        home = mkDefault "/var/lib/colima";
-        # The username isn't allowed to have an underscore in its name, the VM
-        # will fail to start with the following error otherwise
+    (mkIf cfg.enable {
+      launchd.daemons.colima = {
+        script =
+          concatStringsSep " " [
+            "exec"
+            (getExe cfg.package)
+            "start"
+            "--foreground"
+            "--runtime ${cfg.runtime}"
+            "--arch ${cfg.architectue}"
+            "--vm-type ${cfg.vmType}"
+          ]
+          + escapeShellArgs cfg.extraFlags;
+
+        serviceConfig = {
+          KeepAlive = true;
+          RunAtLoad = true;
+          StandardErrorPath = cfg.logFile;
+          StandardOutPath = cfg.logFile;
+          GroupName = group.name;
+          UserName = user.name;
+          WorkingDirectory = cfg.stateDir;
+          EnvironmentVariables = {
+            PATH = "${cfg.package}/bin:${pkgs.docker}/bin:/usr/bin:/bin:/usr/sbin:/sbin";
+            COLIMA_HOME = "${cfg.stateDir}/.colima";
+          };
+        };
+      };
+
+      system.activationScripts.preActivation.text = ''
+        touch '${cfg.logFile}'
+        chown ${toString user.uid}:${toString user.gid} '${cfg.logFile}'
+      '';
+
+      users = {
+        knownGroups = [
+          "colima"
+          "_colima"
+        ];
+        knownUsers = [
+          "colima"
+          "_colima"
+        ];
+      };
+
+      users.users."colima" = {
+        uid = 500; # NOTE: changed from contents of PR
+        gid = 500; # NOTE: changed from contents of PR
+        home = cfg.stateDir;
+        # The username isn't allowed to have an underscore in the beginning of
+        # its name, otherwise the VM will fail to start with the following error
         #   > "[hostagent] identifier \"_colima\" must match ^[A-Za-z0-9]+(?:[._-](?:[A-Za-z0-9]+))*$: invalid argument" fields.level=fatal
         name = "colima";
         createHome = true;
@@ -150,14 +181,13 @@ in {
         description = "System user for Colima";
       };
 
-      groups."_colima" = {
-        gid = mkDefault 32002;
+      users.groups."_colima" = {
+        gid = 500; # NOTE: changed from contents of PR
         name = "_colima";
         description = "System group for Colima";
-        members = cfg.groupMembers;
       };
-    };
-  };
+    })
+  ];
 
   meta.maintainers = [
     lib.maintainers.bryanhonof or "bryanhonof"
