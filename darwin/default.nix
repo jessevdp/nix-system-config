@@ -6,6 +6,7 @@
     ./finder.nix
     ./homebrew.nix
     ./keyboard.nix
+    ./maccy.nix
     ./mission-control.nix
 
     ./colima.nix
