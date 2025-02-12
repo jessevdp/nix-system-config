@@ -4,6 +4,7 @@
     ./btop.nix
     ./core.nix
     ./direnv.nix
+    ./docker.nix
     ./ghostty.nix
     ./git-delta.nix
     ./git.nix

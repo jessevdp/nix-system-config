@@ -1,10 +1,6 @@
-{
-  services.colima = {
-    enable = true;
-    enableDockerCompatability = true;
-    groupMembers = [
-      # TODO: make username a variable?
-      "jessevanderpluijm"
-    ];
-  };
+{pkgs, ...}: {
+  environment.systemPackages = with pkgs; [
+    docker
+    colima
+  ];
 }
