@@ -1,6 +1,7 @@
 {pkgs, ...}: {
   imports = [
     ./1password.nix
+    ./discord.nix
     ./dock.nix
     ./finder.nix
     ./homebrew.nix
