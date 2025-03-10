@@ -6,6 +6,7 @@
     ./homebrew.nix
     ./keyboard.nix
     ./maccy.nix
+    ./mc.nix
     ./mission-control.nix
   ];
 
