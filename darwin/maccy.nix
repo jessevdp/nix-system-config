@@ -21,6 +21,8 @@
       searchMode = "fuzzy";
       highlightMatch = "color";
 
+      historySize = 1000;
+
       # Command (⌘) + Shift (⇧) + C
       KeyboardShortcuts_popup = "{\"carbonKeyCode\":8,\"carbonModifiers\":768}";
       # Command (⌘) + P
