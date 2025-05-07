@@ -29,6 +29,12 @@
       push.autoSetupRemote = true;
       rebase.updateRefs = true;
       merge.conflictStyle = "zdiff3";
+
+      diff = {
+        "rails_credentials" = {
+          textconv = "bin/rails credentials:diff";
+        };
+      };
     };
   };
 
