@@ -1,4 +1,8 @@
-{config, ...}: {
+{
+  config,
+  lib,
+  ...
+}: {
   imports = [
     ./bat.nix
     ./btop.nix
@@ -22,6 +26,10 @@
     # Used for backwards compatibility, please read the release notes / changelog
     # before changing.
     stateVersion = "25.05";
+
+    # TODO: make variable & inherit from Darwin config?
+    homeDirectory = lib.mkDefault "/Users/jessevanderpluijm/";
+    username = lib.mkDefault "jessevanderpluijm";
   };
 
   xdg = {

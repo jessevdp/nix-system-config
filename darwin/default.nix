@@ -15,10 +15,6 @@
   # $ darwin-rebuild changelog
   system.stateVersion = 5;
 
-  # We install Nix using a separate installer so we don't want nix-darwin
-  # to manage it for us. This tells nix-darwin to just use whatever is running.
-  nix.useDaemon = true;
-
   programs.zsh.enable = true;
 
   # TODO: make username a variable?
@@ -26,10 +22,12 @@
     home = "/Users/jessevanderpluijm";
   };
 
+  system.primaryUser = "jessevanderpluijm";
+
   environment.systemPackages = with pkgs; [
     git
     vim
   ];
 
-  security.pam.enableSudoTouchIdAuth = true;
+  security.pam.services.sudo_local.touchIdAuth = true;
 }
