@@ -6,7 +6,7 @@
       KEYTIMEOUT = 1; # Reduce mode switching delay
     };
 
-    initExtra =
+    initContent =
       # sh
       ''
         bindkey -v

@@ -16,7 +16,7 @@ in {
       }
     ];
 
-    initExtraFirst =
+    initContentFirst =
       # sh
       ''
         # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
@@ -27,7 +27,7 @@ in {
         fi
       '';
 
-    initExtra =
+    initContent =
       # sh
       ''
         [[ ! -f ${config.xdg.configHome}/${filename} ]] || source ${config.xdg.configHome}/${filename}

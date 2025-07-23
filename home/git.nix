@@ -38,7 +38,7 @@
     };
   };
 
-  programs.zsh.initExtra =
+  programs.zsh.initContent =
     # sh
     ''
       # No arguments: `git status`

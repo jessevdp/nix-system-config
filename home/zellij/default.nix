@@ -12,7 +12,7 @@
     "zellij/layouts".source = ./layouts;
   };
 
-  programs.zsh.initExtra = lib.mkOrder 200
+  programs.zsh.initContent = lib.mkOrder 200
     # sh
     ''
       # FIXME: the regular zellij zsh completion integration is broken. See:

@@ -48,7 +48,7 @@
       }
     ];
 
-    initExtra =
+    initContent =
       # sh
       ''
         bindkey -M vicmd / fzf-history-widget

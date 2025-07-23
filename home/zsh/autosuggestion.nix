@@ -4,7 +4,7 @@
     strategy = ["history" "completion"];
   };
 
-  programs.zsh.initExtra =
+  programs.zsh.initContent =
     # sh
     ''
       bindkey '^y' autosuggest-accept

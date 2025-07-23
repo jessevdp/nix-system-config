@@ -11,13 +11,13 @@
     enable = true;
     enableCompletion = true;
 
-    initExtraBeforeCompInit =
+    initContentBeforeCompInit =
       # sh
       ''
         fpath+=${pkgs.zsh-completions}/share/zsh/site-functions
       '';
 
-    initExtra =
+    initContent =
       # sh
       ''
         zstyle ':completion:*' use-cache on

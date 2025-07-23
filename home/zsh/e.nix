@@ -3,7 +3,7 @@
     history.ignorePatterns = [
       "e"
     ];
-    initExtra =
+    initContent =
       # sh
       ''
         function e() {
