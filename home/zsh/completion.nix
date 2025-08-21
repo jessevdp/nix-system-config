@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  lib,
   ...
 }: {
   home.packages = with pkgs; [
@@ -11,17 +12,21 @@
     enable = true;
     enableCompletion = true;
 
-    initContentBeforeCompInit =
-      # sh
-      ''
-        fpath+=${pkgs.zsh-completions}/share/zsh/site-functions
-      '';
-
-    initContent =
-      # sh
-      ''
-        zstyle ':completion:*' use-cache on
-        zstyle ':completion:*' cache-path "${config.xdg.cacheHome}/zsh/zcompcache"
-      '';
+    initContent = let
+      beforeCompInit =
+        lib.mkOrder 550
+        # sh
+        ''
+          fpath+=${pkgs.zsh-completions}/share/zsh/site-functions
+        '';
+      zshConfig =
+        lib.mkOrder 1000
+        # sh
+        ''
+          zstyle ':completion:*' use-cache on
+          zstyle ':completion:*' cache-path "${config.xdg.cacheHome}/zsh/zcompcache"
+        '';
+    in
+      lib.mkMerge [beforeCompInit zshConfig];
   };
 }
