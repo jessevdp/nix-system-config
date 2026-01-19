@@ -1,6 +1,6 @@
 {
   xdg.configFile."ghostty/config".text = ''
-    theme = GruvboxDark
+    theme = Gruvbox Dark
 
     title = " "
     macos-titlebar-proxy-icon = hidden
