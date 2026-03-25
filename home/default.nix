@@ -1,5 +1,6 @@
 {
   config,
+  pkgs,
   lib,
   ...
 }: {
@@ -40,7 +41,26 @@
     "${config.home.homeDirectory}/.ssh/nix_system_secrets_decryption_ed25519"
   ];
 
-  home.sessionVariables = {
-    CLICOLOR = 1;
+  services.ollama = {
+    enable = true;
   };
+
+  programs.nh.enable = true;
+
+  programs.neovim = {
+    enable = true;
+    defaultEditor = true;
+    withRuby = false;
+  };
+  home.sessionVariables = {
+    MANPAGER = "nvim +Man!";
+  };
+
+  home.packages = with pkgs; [
+    ripgrep
+    harper
+    nodePackages.cspell
+
+    obsidian
+  ];
 }
