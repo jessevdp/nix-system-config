@@ -15,4 +15,5 @@
     };
   };
 
+  home.file.".hushlogin".text = "";
 }
