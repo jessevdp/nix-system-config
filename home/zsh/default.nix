@@ -1,4 +1,4 @@
-{
+{config, ...}: {
   imports = [
     ./autosuggestion.nix
     ./completion.nix
@@ -13,5 +13,6 @@
   programs.zsh = {
     enable = true;
     syntaxHighlighting.enable = true;
+    dotDir = "${config.xdg.configHome}/zsh";
   };
 }

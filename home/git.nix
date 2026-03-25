@@ -15,10 +15,11 @@
 
   programs.git = {
     enable = true;
-    userName = "Jesse van der Pluijm";
-    userEmail = "jessevdp@hey.com";
-
-    extraConfig = {
+    settings = {
+      user = {
+        name = "Jesse van der Pluijm";
+        email = "jessevdp@hey.com";
+      };
       gpg.format = "ssh";
       user.signingkey = config.age.secrets.jessevdp_github_signing_ssh_key.path;
       commit.gpgsign = true;

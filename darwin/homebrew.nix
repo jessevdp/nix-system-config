@@ -1,4 +1,4 @@
-{
+{config, ...}: {
   homebrew = {
     enable = true;
     onActivation = {
@@ -9,4 +9,7 @@
       "logi-options+"
     ];
   };
+  environment.systemPath = [
+    config.homebrew.brewPrefix
+  ];
 }

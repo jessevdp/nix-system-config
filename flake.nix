@@ -3,11 +3,11 @@
 
   inputs = {
     nixpkgs = {
-      url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+      url = "github:NixOS/nixpkgs/nixos-25.11";
     };
 
     darwin = {
-      url = "github:LnL7/nix-darwin";
+      url = "github:nix-darwin/nix-darwin/nix-darwin-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -21,7 +21,7 @@
     };
 
     home-manager = {
-      url = "github:nix-community/home-manager";
+      url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -67,8 +67,21 @@
 
             nixpkgs = {
               hostPlatform = "aarch64-darwin";
+              overlays = [
+                (final: prev: {
+                  direnv = prev.direnv.overrideAttrs (old: {
+                    buildPhase = ''
+                      CGO_ENABLED=1 make BASH_PATH=$BASH_PATH
+                    '';
+                  });
+                })
+              ];
               config = {
                 allowUnfree = true;
+                permittedInsecurePackages = [
+                  "lima-full-1.2.2"
+                  "lima-additional-guestagents-1.2.2"
+                ];
               };
             };
           }
