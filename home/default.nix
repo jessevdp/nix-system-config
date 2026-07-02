@@ -62,5 +62,6 @@
     nodePackages.cspell
 
     obsidian
+    opencode
   ];
 }

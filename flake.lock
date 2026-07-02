@@ -255,6 +255,26 @@
         "type": "github"
       }
     },
+    "opencode": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1782978827,
+        "narHash": "sha256-pT0e6O5V8MMdosO08NaSUOI9vDlfwn0XUMP/EzozbLM=",
+        "owner": "anomalyco",
+        "repo": "opencode",
+        "rev": "f52424e05fab0edddb4462112ceb02044085f903",
+        "type": "github"
+      },
+      "original": {
+        "owner": "anomalyco",
+        "repo": "opencode",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "agenix": "agenix",
@@ -263,6 +283,7 @@
         "home-manager": "home-manager",
         "mac-app-util": "mac-app-util",
         "nixpkgs": "nixpkgs_4",
+        "opencode": "opencode",
         "systems": "systems_2"
       }
     },

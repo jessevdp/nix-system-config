@@ -41,6 +41,11 @@
     };
 
     systems.url = "github:nix-systems/default";
+
+    opencode = {
+      url = "github:anomalyco/opencode";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
@@ -51,6 +56,7 @@
     agenix,
     flake-utils,
     mac-app-util,
+    opencode,
     ...
   }:
     {
@@ -75,6 +81,7 @@
                     '';
                   });
                 })
+                opencode.overlays.default
               ];
               config = {
                 allowUnfree = true;

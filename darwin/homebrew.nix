@@ -17,7 +17,6 @@
       "cursor-cli"
     ];
     brews = [
-      "sst/tap/opencode"
     ];
   };
   environment.systemPath = [
