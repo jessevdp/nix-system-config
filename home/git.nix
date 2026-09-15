@@ -4,8 +4,8 @@
     path = "${config.home.homeDirectory}/.ssh/jessevdp_github_auth_ed25519";
   };
 
-  programs.ssh.matchBlocks."github.com" = {
-    identityFile = config.age.secrets.jessevdp_github_auth_ssh_key.path;
+  programs.ssh.settings."github.com" = {
+    IdentityFile = config.age.secrets.jessevdp_github_auth_ssh_key.path;
   };
 
   age.secrets.jessevdp_github_signing_ssh_key = {

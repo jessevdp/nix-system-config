@@ -6,9 +6,9 @@ in {
     path = "${config.home.homeDirectory}/.ssh/jessevdp_io_bitbucket_auth_ed25519";
   };
 
-  programs.ssh.matchBlocks."${sshHostAlias}" = {
-    hostname = "bitbucket.com";
-    identityFile = config.age.secrets.jessevdp_io_bitbucket_auth_ssh_key.path;
+  programs.ssh.settings."${sshHostAlias}" = {
+    HostName = "bitbucket.com";
+    IdentityFile = config.age.secrets.jessevdp_io_bitbucket_auth_ssh_key.path;
   };
 
   programs.git.includes = [

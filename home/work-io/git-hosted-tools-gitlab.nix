@@ -6,9 +6,9 @@ in {
     path = "${config.home.homeDirectory}/.ssh/jessevdp_io_hosted_tools_gitlab_auth_ed25519";
   };
 
-  programs.ssh.matchBlocks."${sshHostAlias}" = {
-    hostname = "gitlab.hosted-tools.com";
-    identityFile = config.age.secrets.jessevdp_io_hosted_tools_gitlab_auth_ssh_key.path;
+  programs.ssh.settings."${sshHostAlias}" = {
+    HostName = "gitlab.hosted-tools.com";
+    IdentityFile = config.age.secrets.jessevdp_io_hosted_tools_gitlab_auth_ssh_key.path;
   };
 
   programs.git.includes = [

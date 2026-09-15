@@ -51,6 +51,7 @@
     enable = true;
     defaultEditor = true;
     withRuby = false;
+    withPython3 = false;
   };
   home.sessionVariables = {
     MANPAGER = "nvim +Man!";
