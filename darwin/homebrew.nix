@@ -17,10 +17,13 @@
       "cursor-cli"
     ];
     brews = [
-      "sst/tap/opencode"
+      {
+        name = "sst/tap/opencode";
+        trusted = true;
+      }
     ];
   };
   environment.systemPath = [
-    config.homebrew.brewPrefix
+    "${config.homebrew.prefix}/bin"
   ];
 }

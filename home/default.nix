@@ -59,7 +59,7 @@
   home.packages = with pkgs; [
     ripgrep
     harper
-    nodePackages.cspell
+    cspell
 
     obsidian
   ];
