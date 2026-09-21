@@ -15,6 +15,7 @@
 
   programs.git = {
     enable = true;
+    ignores = [".opencode"];
     settings = {
       user = {
         name = "Jesse van der Pluijm";
