@@ -10,6 +10,7 @@
       "ghostty"
       "lm-studio"
       "logi-options+"
+      "omniwm"
       "spotify"
       "tableplus"
       "typora"
