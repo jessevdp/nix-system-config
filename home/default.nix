@@ -47,17 +47,14 @@
 
   programs.nh.enable = true;
 
-  programs.neovim = {
-    enable = true;
-    defaultEditor = true;
-    withRuby = false;
-    withPython3 = false;
-  };
   home.sessionVariables = {
+    EDITOR = "nvim";
+    VISUAL = "nvim";
     MANPAGER = "nvim +Man!";
   };
 
   home.packages = with pkgs; [
+    neovim
     ripgrep
     harper
     cspell
