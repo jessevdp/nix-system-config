@@ -15,6 +15,7 @@
     ./git.nix
     ./lazydocker.nix
     ./lazygit.nix
+    ./opencode.nix
     ./safari.nix
     ./ssh.nix
     ./zellij

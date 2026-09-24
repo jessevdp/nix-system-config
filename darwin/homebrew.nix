@@ -19,7 +19,7 @@
     ];
     brews = [
       {
-        name = "sst/tap/opencode";
+        name = "anomalyco/tap/opencode-v2";
         trusted = true;
       }
     ];
