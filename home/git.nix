@@ -15,7 +15,6 @@
 
   programs.git = {
     enable = true;
-    ignores = [".opencode" ".DS_Store"];
     settings = {
       user = {
         name = "Jesse van der Pluijm";
@@ -38,6 +37,10 @@
         };
       };
     };
+    ignores = [
+      ".opencode"
+      ".DS_Store"
+    ];
   };
 
   programs.zsh.initContent =
