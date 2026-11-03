@@ -38,6 +38,11 @@
     enable = true;
   };
 
+  targets.darwin = {
+    linkApps.enable = false;
+    copyApps.enable = true;
+  };
+
   age.identityPaths = [
     "${config.home.homeDirectory}/.ssh/nix_system_secrets_decryption_ed25519"
   ];

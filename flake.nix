@@ -11,15 +11,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    mac-app-util = {
-      url = "github:hraban/mac-app-util";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        flake-utils.follows = "flake-utils";
-        systems.follows = "systems";
-      };
-    };
-
     home-manager = {
       url = "github:nix-community/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -50,7 +41,6 @@
     home-manager,
     agenix,
     flake-utils,
-    mac-app-util,
     ...
   }:
     {
@@ -86,7 +76,6 @@
             };
           }
           ./darwin
-          mac-app-util.darwinModules.default
           home-manager.darwinModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
@@ -95,7 +84,6 @@
             home-manager.users.jessevanderpluijm = {...}: {
               imports = [
                 ./home
-                mac-app-util.homeManagerModules.default
                 agenix.homeManagerModules.default
               ];
             };
