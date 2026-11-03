@@ -15,7 +15,7 @@
 
   programs.git = {
     enable = true;
-    ignores = [".opencode"];
+    ignores = [".opencode" ".DS_Store"];
     settings = {
       user = {
         name = "Jesse van der Pluijm";
