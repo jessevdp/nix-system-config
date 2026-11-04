@@ -64,6 +64,7 @@
     ripgrep
     harper
     cspell
+    glab
 
     obsidian
   ];
